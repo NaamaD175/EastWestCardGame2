@@ -10,7 +10,6 @@ class ResultViewController: UIViewController {
     var finalScore: Int = 0
     var playerWon: Bool = true
 
-    // Result screen stays in landscape, matching the battle screen
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return [.landscapeLeft, .landscapeRight]
     }

@@ -1,20 +1,27 @@
 import AVFoundation
 
-/// Manages all audio in the app: background music and sound effects.
-/// Background music loops continuously and pauses/resumes with the app lifecycle.
-/// Sound effects (flip, win, lose) play once on demand.
 class SoundManager {
 
     static let shared = SoundManager()
     private init() {}
 
+    private func setupAudioSession() {
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch {
+            print("Audio session error: \(error)")
+        }
+    }
+
     private var backgroundPlayer: AVAudioPlayer?
-    private var effectPlayer: AVAudioPlayer?
+    private var flipPlayer: AVAudioPlayer?
+    private var resultPlayer: AVAudioPlayer?
 
-    // MARK: - Background Music
 
-    /// Start looping background music from the moment the game begins.
+    // Start looping background music from the moment the game begins
     func startBackgroundMusic() {
+        setupAudioSession()
         guard backgroundPlayer == nil else {
             backgroundPlayer?.play()
             return
@@ -30,48 +37,54 @@ class SoundManager {
         }
     }
 
-    /// Pause background music (app goes to background or game ends).
+    // Pause background music
     func pauseBackgroundMusic() {
         backgroundPlayer?.pause()
     }
 
-    /// Resume background music after returning to the app.
+    // Resume background music after returning to the app
     func resumeBackgroundMusic() {
         backgroundPlayer?.play()
     }
 
-    /// Stop and reset background music (when leaving the game screen).
+    // Stop background music (when leaving the game)
     func stopBackgroundMusic() {
         backgroundPlayer?.stop()
         backgroundPlayer?.currentTime = 0
         backgroundPlayer = nil
     }
 
-    // MARK: - Sound Effects
 
-    /// Play the card flip sound between rounds.
+    // Play the card flip sound
     func playFlip() {
-        playEffect(named: "flipCard")
+        guard let url = Bundle.main.url(forResource: "flipCard", withExtension: "mp3") else { return }
+        do {
+            flipPlayer = try AVAudioPlayer(contentsOf: url)
+            flipPlayer?.volume = 0.8
+            flipPlayer?.play()
+        } catch {
+            print("Flip sound error: \(error)")
+        }
     }
 
-    /// Play the victory sound when the player wins a round or the game.
+    // Play the victory sound
     func playVictory() {
-        playEffect(named: "victorySound")
+        playResultEffect(named: "victorySound")
     }
 
-    /// Play the lose sound when the player loses a round or the game.
+    // Play the lose sound
     func playLose() {
-        playEffect(named: "loseGame")
+        playResultEffect(named: "loseGame")
     }
 
-    private func playEffect(named name: String) {
+    private func playResultEffect(named name: String) {
         guard let url = Bundle.main.url(forResource: name, withExtension: "mp3") else { return }
         do {
-            effectPlayer = try AVAudioPlayer(contentsOf: url)
-            effectPlayer?.volume = 0.8
-            effectPlayer?.play()
+            resultPlayer = try AVAudioPlayer(contentsOf: url)
+            resultPlayer?.volume = 0.8
+            resultPlayer?.play()
         } catch {
-            print("Sound effect error: \(error)")
+            print("Result sound error: \(error)")
         }
     }
 }

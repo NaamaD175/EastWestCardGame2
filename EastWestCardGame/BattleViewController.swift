@@ -50,9 +50,8 @@ class BattleViewController: UIViewController {
     }()
 
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return [.landscapeLeft, .landscapeRight]
+        return .all
     }
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,18 +63,36 @@ class BattleViewController: UIViewController {
         battle_IMG_leftCard.image  = UIImage(named: "card-back")
         battle_IMG_rightCard.image = UIImage(named: "card-back")
         applyDarkModeAppearance()
+
+        // Switch cards, glows, clock and timer to frame-based layout.
+        // This allows viewDidLayoutSubviews to position them manually
+        // for both portrait and landscape without Auto Layout conflicts.
+        let managed: [UIView] = [battle_IMG_leftCard, battle_IMG_rightCard,
+                                 battle_VIEW_leftGlow, battle_VIEW_rightGlow,
+                                 battle_IMG_clock, battle_LBL_countdown]
+        for v in managed {
+            v.translatesAutoresizingMaskIntoConstraints = true
+        }
+        // Deactivate storyboard constraints on these views
+        view.constraints
+            .filter { managed.contains($0.firstItem as? UIView ?? UIView()) ||
+                      managed.contains($0.secondItem as? UIView ?? UIView()) }
+            .forEach { $0.isActive = false }
+        managed.forEach { $0.constraints.forEach { $0.isActive = false } }
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         isScreenActive = true
+
+        // Start background music — loops until the player leaves the screen
         SoundManager.shared.startBackgroundMusic()
-    
+
         // Create a timer and start the first round
         roundTimer = RoundTimer(delegate: self)
         roundTimer?.start()
 
-        // Pause the timer and start the first round
+        // Pause the timer when app goes to background
         NotificationCenter.default.addObserver(self, selector: #selector(handleBackground),
                                                name: UIApplication.willResignActiveNotification, object: nil)
         // Resume when they come back to the app
@@ -83,7 +100,7 @@ class BattleViewController: UIViewController {
                                                name: UIApplication.didBecomeActiveNotification, object: nil)
     }
 
-    // Stop everthing when leaving the screen
+    // Stop everything when leaving the screen
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         isScreenActive = false
@@ -109,22 +126,19 @@ class BattleViewController: UIViewController {
         guard let leftCard = deck.randomElement(),
               let rightCard = deck.randomElement() else { return }
 
-        SoundManager.shared.playFlip()
         battle_IMG_leftCard.image  = UIImage(named: leftCard.imageName)
         battle_IMG_rightCard.image = UIImage(named: rightCard.imageName)
 
         let playerValue   = playerSide == .west ? leftCard.value  : rightCard.value
         let computerValue = playerSide == .west ? rightCard.value : leftCard.value
 
-        // Award points
+        // Compare card values and award a point to the winner
         let tie       = (playerValue == computerValue)
         let playerWon = playerValue > computerValue
         if playerWon {
             playerScore += 1
-            SoundManager.shared.playVictory()
         } else if !tie {
             computerScore += 1
-            SoundManager.shared.playLose()
         }
 
         refreshScoreLabels()
@@ -142,7 +156,8 @@ class BattleViewController: UIViewController {
             return
         }
 
-        // Reset cards to the next round
+        // Play flip sound and reset cards to face-down for the next round
+        SoundManager.shared.playFlip()
         battle_IMG_leftCard.image  = UIImage(named: "card-back")
         battle_IMG_rightCard.image = UIImage(named: "card-back")
         hideGlowViews()
@@ -236,18 +251,57 @@ class BattleViewController: UIViewController {
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        let safe   = view.safeAreaInsets
-        let left   = safe.left + 16
-        let right  = view.bounds.width - safe.right - 16
-        let top    = safe.top + 8
-        let nameH: CGFloat  = 22
-        let scoreH: CGFloat = 46
-        let w: CGFloat      = 160
 
-        battle_LBL_leftName.frame   = CGRect(x: left,      y: top,              width: w, height: nameH)
-        battle_LBL_leftScore.frame  = CGRect(x: left,      y: top + nameH + 2,  width: w, height: scoreH)
-        battle_LBL_rightName.frame  = CGRect(x: right - w, y: top,              width: w, height: nameH)
-        battle_LBL_rightScore.frame = CGRect(x: right - w, y: top + nameH + 2,  width: w, height: scoreH)
+        let bounds   = view.bounds
+        let safe     = view.safeAreaInsets
+        let left     = safe.left + 16
+        let right    = bounds.width - safe.right - 16
+        let top      = safe.top + 8
+        let nameH:   CGFloat = 22
+        let scoreH:  CGFloat = 46
+        let labelW:  CGFloat = 160
+        let clockSz: CGFloat = 40
+
+        // Score labels (same in both orientations)
+        battle_LBL_leftName.frame   = CGRect(x: left,           y: top,             width: labelW, height: nameH)
+        battle_LBL_leftScore.frame  = CGRect(x: left,           y: top + nameH + 2, width: labelW, height: scoreH)
+        battle_LBL_rightName.frame  = CGRect(x: right - labelW, y: top,             width: labelW, height: nameH)
+        battle_LBL_rightScore.frame = CGRect(x: right - labelW, y: top + nameH + 2, width: labelW, height: scoreH)
+
+        let scoreBottom = top + nameH + 2 + scoreH + 8
+
+        if bounds.height > bounds.width {
+            let cardW: CGFloat = 145
+            let cardH: CGFloat = 195
+            let cx = bounds.midX
+            let cy = bounds.midY
+
+            let leftCard  = CGRect(x: cx - 8 - cardW, y: cy - cardH / 2, width: cardW, height: cardH)
+            let rightCard = CGRect(x: cx + 8,          y: cy - cardH / 2, width: cardW, height: cardH)
+
+            battle_IMG_leftCard.frame   = leftCard
+            battle_IMG_rightCard.frame  = rightCard
+            battle_VIEW_leftGlow.frame  = leftCard.insetBy(dx: -10, dy: -10)
+            battle_VIEW_rightGlow.frame = rightCard.insetBy(dx: -10, dy: -10)
+
+            let clockY = leftCard.minY - 16 - clockSz
+            battle_IMG_clock.frame      = CGRect(x: cx - clockSz / 2, y: clockY, width: clockSz, height: clockSz)
+            battle_LBL_countdown.frame  = CGRect(x: cx - 35, y: clockY + clockSz + 4, width: 70, height: 50)
+
+        } else {
+            let cardH   = bounds.height - safe.bottom - 10 - scoreBottom
+            let leftCard  = CGRect(x: safe.left + 30, y: scoreBottom, width: 200, height: cardH)
+            let rightCard = CGRect(x: bounds.width - safe.right - 30 - 200, y: scoreBottom, width: 200, height: cardH)
+
+            battle_IMG_leftCard.frame   = leftCard
+            battle_IMG_rightCard.frame  = rightCard
+            battle_VIEW_leftGlow.frame  = leftCard.insetBy(dx: -10, dy: -10)
+            battle_VIEW_rightGlow.frame = rightCard.insetBy(dx: -10, dy: -10)
+
+            let clockY = bounds.midY - 28 - clockSz / 2
+            battle_IMG_clock.frame     = CGRect(x: bounds.midX - clockSz / 2, y: clockY, width: clockSz, height: clockSz)
+            battle_LBL_countdown.frame = CGRect(x: bounds.midX - 35, y: clockY + clockSz + 4, width: 70, height: 50)
+        }
     }
 
 
