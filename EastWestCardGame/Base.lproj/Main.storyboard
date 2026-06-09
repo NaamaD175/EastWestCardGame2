@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24765" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hom-01-ctl">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24743"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Home View Controller-->
+        <scene sceneID="hom-sc-001">
+            <objects>
+                <viewController id="hom-01-ctl" customClass="HomeViewController" customModule="EastWestCardGame" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hom-01-vw">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hom-west-vw">
+                                <rect key="frame" x="0.0" y="0.0" width="180" height="852"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hom-east-vw">
+                                <rect key="frame" x="213" y="0.0" width="180" height="852"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hi there!" textAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hom-greet-lbl">
+                                <rect key="frame" x="46.666666666666657" y="20" width="300" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hom-name-btn">
+                                <rect key="frame" x="96.666666666666686" y="76" width="200" height="44"/>
+                                <state key="normal" title="Insert Name"/>
+                                <connections>
+                                    <action selector="tappedEnterName:" destination="hom-01-ctl" eventType="touchUpInside" id="hom-name-act"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hom-play-btn">
+                                <rect key="frame" x="96.666666666666686" y="160" width="200" height="44"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <state key="normal" title="START"/>
+                                <connections>
+                                    <action selector="tappedPlay:" destination="hom-01-ctl" eventType="touchUpInside" id="hom-play-act"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Dkd-zF-BPb"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="hom-west-vw" firstAttribute="leading" secondItem="hom-01-vw" secondAttribute="leading" id="c01"/>
+                            <constraint firstItem="hom-west-vw" firstAttribute="top" secondItem="hom-01-vw" secondAttribute="top" id="c02"/>
+                            <constraint firstItem="hom-west-vw" firstAttribute="bottom" secondItem="hom-01-vw" secondAttribute="bottom" id="c03"/>
+                            <constraint firstItem="hom-west-vw" firstAttribute="width" constant="245" id="c04"/>
+                            <constraint firstItem="hom-east-vw" firstAttribute="trailing" secondItem="hom-01-vw" secondAttribute="trailing" id="c05"/>
+                            <constraint firstItem="hom-east-vw" firstAttribute="top" secondItem="hom-01-vw" secondAttribute="top" id="c06"/>
+                            <constraint firstItem="hom-east-vw" firstAttribute="bottom" secondItem="hom-01-vw" secondAttribute="bottom" id="c07"/>
+                            <constraint firstItem="hom-east-vw" firstAttribute="width" constant="245" id="c08"/>
+                            <constraint firstItem="hom-greet-lbl" firstAttribute="centerX" secondItem="hom-01-vw" secondAttribute="centerX" id="c09"/>
+                            <constraint firstItem="hom-greet-lbl" firstAttribute="top" secondItem="hom-01-vw" secondAttribute="top" constant="20" id="c10"/>
+                            <constraint firstItem="hom-greet-lbl" firstAttribute="width" constant="300" id="c11"/>
+                            <constraint firstItem="hom-greet-lbl" firstAttribute="height" constant="36" id="c11b"/>
+                            <constraint firstItem="hom-name-btn" firstAttribute="centerX" secondItem="hom-01-vw" secondAttribute="centerX" id="c12"/>
+                            <constraint firstItem="hom-name-btn" firstAttribute="top" secondItem="hom-greet-lbl" secondAttribute="bottom" constant="20" id="c13"/>
+                            <constraint firstItem="hom-name-btn" firstAttribute="width" constant="200" id="c14"/>
+                            <constraint firstItem="hom-name-btn" firstAttribute="height" constant="44" id="c14b"/>
+                            <constraint firstItem="hom-play-btn" firstAttribute="centerX" secondItem="hom-01-vw" secondAttribute="centerX" id="c15"/>
+                            <constraint firstItem="hom-play-btn" firstAttribute="top" secondItem="hom-name-btn" secondAttribute="bottom" constant="40" id="c16"/>
+                            <constraint firstItem="hom-play-btn" firstAttribute="width" constant="200" id="c17"/>
+                            <constraint firstItem="hom-play-btn" firstAttribute="height" constant="44" id="c17b"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="home_BTN_enterName" destination="hom-name-btn" id="hom-out-01"/>
+                        <outlet property="home_BTN_play" destination="hom-play-btn" id="hom-out-02"/>
+                        <outlet property="home_LBL_greeting" destination="hom-greet-lbl" id="hom-out-03"/>
+                        <outlet property="home_VIEW_eastHighlight" destination="hom-east-vw" id="hom-out-05"/>
+                        <outlet property="home_VIEW_westHighlight" destination="hom-west-vw" id="hom-out-04"/>
+                        <segue destination="bat-01-ctl" kind="show" identifier="toGame" id="hom-to-bat"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hom-fr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="139" y="666"/>
+        </scene>
+        <!--Battle View Controller-->
+        <scene sceneID="bat-sc-001">
+            <objects>
+                <viewController id="bat-01-ctl" customClass="BattleViewController" customModule="EastWestCardGame" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bat-01-vw">
+                        <rect key="frame" x="0.0" y="0.0" width="844" height="390"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <!-- Glow views FIRST (bottom layer — drawn behind everything) -->
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bat-lglow-vw">
+                                <color key="backgroundColor" red="0.0" green="0.48" blue="1.0" alpha="0.15" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bat-rglow-vw">
+                                <color key="backgroundColor" red="0.0" green="0.48" blue="1.0" alpha="0.15" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <!-- Card images (above glow) -->
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="bat-lcard-img"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="bat-rcard-img"/>
+                            <!-- Score labels LAST (top layer — always visible) -->
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bat-lname-lbl">
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bat-lscore-lbl">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="36"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PC" textAlignment="right" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bat-rname-lbl">
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bat-rscore-lbl">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="36"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <!-- Clock icon and timer (center) -->
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="bat-clock-img">
+                                <image key="image" systemName="stopwatch"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4" textAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bat-timer-lbl">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="UgL-QO-sM7"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <!-- Left name: top-left -->
+                            <constraint firstItem="bat-lname-lbl" firstAttribute="leading" secondItem="UgL-QO-sM7" secondAttribute="leading" constant="16" id="bc01"/>
+                            <constraint firstItem="bat-lname-lbl" firstAttribute="top" secondItem="UgL-QO-sM7" secondAttribute="top" constant="8" id="bc02"/>
+                            <constraint firstItem="bat-lname-lbl" firstAttribute="width" constant="160" id="bc02b"/>
+                            <!-- Left score: below name -->
+                            <constraint firstItem="bat-lscore-lbl" firstAttribute="leading" secondItem="UgL-QO-sM7" secondAttribute="leading" constant="16" id="bc03"/>
+                            <constraint firstItem="bat-lscore-lbl" firstAttribute="top" secondItem="bat-lname-lbl" secondAttribute="bottom" constant="2" id="bc04"/>
+                            <constraint firstItem="bat-lscore-lbl" firstAttribute="width" constant="160" id="bc04b"/>
+                            <!-- Right name: top-right -->
+                            <constraint firstItem="bat-rname-lbl" firstAttribute="trailing" secondItem="UgL-QO-sM7" secondAttribute="trailing" constant="-16" id="bc05"/>
+                            <constraint firstItem="bat-rname-lbl" firstAttribute="top" secondItem="UgL-QO-sM7" secondAttribute="top" constant="8" id="bc06"/>
+                            <constraint firstItem="bat-rname-lbl" firstAttribute="width" constant="160" id="bc06b"/>
+                            <!-- Right score: below PC label -->
+                            <constraint firstItem="bat-rscore-lbl" firstAttribute="trailing" secondItem="UgL-QO-sM7" secondAttribute="trailing" constant="-16" id="bc07"/>
+                            <constraint firstItem="bat-rscore-lbl" firstAttribute="top" secondItem="bat-rname-lbl" secondAttribute="bottom" constant="2" id="bc08"/>
+                            <constraint firstItem="bat-rscore-lbl" firstAttribute="width" constant="160" id="bc08b"/>
+                            <!-- Left card: fills left side below scores -->
+                            <constraint firstItem="bat-lcard-img" firstAttribute="leading" secondItem="UgL-QO-sM7" secondAttribute="leading" constant="30" id="bc09"/>
+                            <constraint firstItem="bat-lcard-img" firstAttribute="top" secondItem="bat-lscore-lbl" secondAttribute="bottom" constant="8" id="bc10"/>
+                            <constraint firstItem="bat-lcard-img" firstAttribute="bottom" secondItem="UgL-QO-sM7" secondAttribute="bottom" constant="-10" id="bc11"/>
+                            <constraint firstItem="bat-lcard-img" firstAttribute="width" constant="200" id="bc12"/>
+                            <!-- Right card: fills right side below scores -->
+                            <constraint firstItem="bat-rcard-img" firstAttribute="trailing" secondItem="UgL-QO-sM7" secondAttribute="trailing" constant="-30" id="bc13"/>
+                            <constraint firstItem="bat-rcard-img" firstAttribute="top" secondItem="bat-rscore-lbl" secondAttribute="bottom" constant="8" id="bc14"/>
+                            <constraint firstItem="bat-rcard-img" firstAttribute="bottom" secondItem="UgL-QO-sM7" secondAttribute="bottom" constant="-10" id="bc15"/>
+                            <constraint firstItem="bat-rcard-img" firstAttribute="width" constant="200" id="bc16"/>
+                            <!-- Clock: center of screen, vertically centered -->
+                            <constraint firstItem="bat-clock-img" firstAttribute="centerX" secondItem="bat-01-vw" secondAttribute="centerX" id="bc17"/>
+                            <constraint firstItem="bat-clock-img" firstAttribute="centerY" secondItem="bat-01-vw" secondAttribute="centerY" constant="-28" id="bc18"/>
+                            <constraint firstItem="bat-clock-img" firstAttribute="width" constant="40" id="bc19"/>
+                            <constraint firstItem="bat-clock-img" firstAttribute="height" constant="40" id="bc20"/>
+                            <!-- Timer label: just below clock -->
+                            <constraint firstItem="bat-timer-lbl" firstAttribute="centerX" secondItem="bat-01-vw" secondAttribute="centerX" id="bc21"/>
+                            <constraint firstItem="bat-timer-lbl" firstAttribute="top" secondItem="bat-clock-img" secondAttribute="bottom" constant="4" id="bc22"/>
+                            <constraint firstItem="bat-timer-lbl" firstAttribute="width" constant="70" id="bc23"/>
+                            <constraint firstItem="bat-timer-lbl" firstAttribute="height" constant="50" id="bc24"/>
+                            <!-- Left glow around left card -->
+                            <constraint firstItem="bat-lglow-vw" firstAttribute="leading" secondItem="bat-lcard-img" secondAttribute="leading" constant="-10" id="bc25"/>
+                            <constraint firstItem="bat-lglow-vw" firstAttribute="trailing" secondItem="bat-lcard-img" secondAttribute="trailing" constant="10" id="bc26"/>
+                            <constraint firstItem="bat-lglow-vw" firstAttribute="top" secondItem="bat-lcard-img" secondAttribute="top" constant="-10" id="bc27"/>
+                            <constraint firstItem="bat-lglow-vw" firstAttribute="bottom" secondItem="bat-lcard-img" secondAttribute="bottom" constant="10" id="bc28"/>
+                            <!-- Right glow around right card -->
+                            <constraint firstItem="bat-rglow-vw" firstAttribute="leading" secondItem="bat-rcard-img" secondAttribute="leading" constant="-10" id="bc29"/>
+                            <constraint firstItem="bat-rglow-vw" firstAttribute="trailing" secondItem="bat-rcard-img" secondAttribute="trailing" constant="10" id="bc30"/>
+                            <constraint firstItem="bat-rglow-vw" firstAttribute="top" secondItem="bat-rcard-img" secondAttribute="top" constant="-10" id="bc31"/>
+                            <constraint firstItem="bat-rglow-vw" firstAttribute="bottom" secondItem="bat-rcard-img" secondAttribute="bottom" constant="10" id="bc32"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="battle_LBL_leftName" destination="bat-lname-lbl" id="bat-out-00"/>
+                        <outlet property="battle_LBL_leftScore" destination="bat-lscore-lbl" id="bat-out-01"/>
+                        <outlet property="battle_LBL_rightName" destination="bat-rname-lbl" id="bat-out-02"/>
+                        <outlet property="battle_LBL_rightScore" destination="bat-rscore-lbl" id="bat-out-08"/>
+                        <outlet property="battle_IMG_leftCard" destination="bat-lcard-img" id="bat-out-03"/>
+                        <outlet property="battle_IMG_rightCard" destination="bat-rcard-img" id="bat-out-04"/>
+                        <outlet property="battle_IMG_clock" destination="bat-clock-img" id="bat-out-09"/>
+                        <outlet property="battle_LBL_countdown" destination="bat-timer-lbl" id="bat-out-05"/>
+                        <outlet property="battle_VIEW_leftGlow" destination="bat-lglow-vw" id="bat-out-06"/>
+                        <outlet property="battle_VIEW_rightGlow" destination="bat-rglow-vw" id="bat-out-07"/>
+                        <segue destination="res-01-ctl" kind="show" identifier="toResult" id="bat-to-res"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bat-fr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="139" y="666"/>
+        </scene>
+        <!--Result View Controller-->
+        <scene sceneID="res-sc-001">
+            <objects>
+                <viewController id="res-01-ctl" customClass="ResultViewController" customModule="EastWestCardGame" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="res-01-vw">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Winner: -" textAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="res-winner-lbl">
+                                <rect key="frame" x="-3.6666666666666572" y="306.66666666666669" width="400.33333333333326" height="50"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score: 0" textAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="res-score-lbl">
+                                <rect key="frame" x="46.666666666666657" y="372.66666666666669" width="300" height="40"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="res-back-btn">
+                                <rect key="frame" x="96.666666666666686" y="436.66666666666669" width="200" height="44"/>
+                                <state key="normal" title="BACK TO MENU"/>
+                                <connections>
+                                    <action selector="tappedBackToHome:" destination="res-01-ctl" eventType="touchUpInside" id="res-back-act"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="j6R-K5-Muu"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="res-winner-lbl" firstAttribute="centerX" secondItem="res-01-vw" secondAttribute="centerX" id="rc01"/>
+                            <constraint firstItem="res-winner-lbl" firstAttribute="centerY" secondItem="res-01-vw" secondAttribute="centerY" constant="-60" id="rc02"/>
+                            <constraint firstItem="res-winner-lbl" firstAttribute="width" constant="400" id="rc03"/>
+                            <constraint firstItem="res-winner-lbl" firstAttribute="height" constant="50" id="rc03b"/>
+                            <constraint firstItem="res-score-lbl" firstAttribute="centerX" secondItem="res-01-vw" secondAttribute="centerX" id="rc04"/>
+                            <constraint firstItem="res-score-lbl" firstAttribute="top" secondItem="res-winner-lbl" secondAttribute="bottom" constant="16" id="rc05"/>
+                            <constraint firstItem="res-score-lbl" firstAttribute="width" constant="300" id="rc06"/>
+                            <constraint firstItem="res-score-lbl" firstAttribute="height" constant="40" id="rc06b"/>
+                            <constraint firstItem="res-back-btn" firstAttribute="centerX" secondItem="res-01-vw" secondAttribute="centerX" id="rc07"/>
+                            <constraint firstItem="res-back-btn" firstAttribute="top" secondItem="res-score-lbl" secondAttribute="bottom" constant="24" id="rc08"/>
+                            <constraint firstItem="res-back-btn" firstAttribute="width" constant="200" id="rc09"/>
+                            <constraint firstItem="res-back-btn" firstAttribute="height" constant="44" id="rc09b"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="result_LBL_score" destination="res-score-lbl" id="res-out-02"/>
+                        <outlet property="result_LBL_winner" destination="res-winner-lbl" id="res-out-01"/>
+                        <outlet property="result_BTN_back" destination="res-back-btn" id="res-out-03"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="res-fr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="139" y="131"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
