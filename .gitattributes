@@ -1,0 +1,4 @@
+*.swift linguist-language=Swift
+*.png linguist-vendored
+*.mp3 linguist-vendored
+*.xcodeproj linguist-vendored
